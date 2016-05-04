@@ -4,10 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class AwtControlDemo {
-
    private Frame mainFrame;
-   private Label headerLabel;
-   private Label statusLabel;
    private Panel controlPanel;
 
    public AwtControlDemo(){
@@ -21,45 +18,53 @@ public class AwtControlDemo {
 
    private void prepareGUI(){
       mainFrame = new Frame("Java AWT Examples");
-      mainFrame.setSize(800,800);
-      mainFrame.setLayout(new GridLayout(3, 1));
+      mainFrame.setSize(550,550);
       mainFrame.addWindowListener(new WindowAdapter() {
          public void windowClosing(WindowEvent windowEvent){
             System.exit(0);
          }        
-      });    
-      headerLabel = new Label();
-      headerLabel.setAlignment(Label.CENTER);
-      statusLabel = new Label();        
-      statusLabel.setAlignment(Label.CENTER);
-      statusLabel.setSize(350,100);
-
+      });
       controlPanel = new Panel();
       controlPanel.setLayout(new FlowLayout());
-
-      mainFrame.add(headerLabel);
       mainFrame.add(controlPanel);
-      mainFrame.add(statusLabel);
       mainFrame.setVisible(true);  
    }
 
    private void showCanvasDemo(){
-      headerLabel.setText("Control in action: Canvas"); 
-
       controlPanel.add(new MyCanvas());
       mainFrame.setVisible(true);  
    } 
 
-   class MyCanvas extends Canvas {
-      public MyCanvas () {
-         setBackground (Color.GRAY);
-         setSize(300, 300);
-      }
-
-      public void paint (Graphics g) {
-         Graphics2D g2;
-         g2 = (Graphics2D) g;
-         g2.drawString ("It is a custom canvas area", 70, 70);
-      }
-   }
+   class MyCanvas extends Canvas implements MouseListener{
+	   Puzzle m_puzzle;
+	   public MyCanvas () {
+		   setBackground(Color.GRAY);
+		   setSize(500,500);
+		   m_puzzle = new Puzzle();
+		   addMouseListener(this);
+	   }
+	   public void paint (Graphics g) {
+		   m_puzzle.draw(g);
+	   }
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			m_puzzle.onTouch(e.getX(), e.getY());
+		}
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+		}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+		}
+   	}
 }
