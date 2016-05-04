@@ -11,6 +11,7 @@ public class Puzzle {
     public Puzzle() {
         m_nodes = new ArrayList<Node>();
         m_edges = new ArrayList<Edge>();
+        m_selectDistance = 500;
 
         m_nodes.add( new Node(100,300) );
         m_nodes.add( new Node(200,200) );

@@ -14,18 +14,15 @@ public class Edge {
 
     public void draw(Graphics g) {
     	if (m_type==EdgeType.regularEdge) {
-    		g.setColor(Color.black);
-    	} else if (m_type==EdgeType.borderEdge) {
     		g.setColor(Color.green);
+    	} else if (m_type==EdgeType.borderEdge) {
+    		g.setColor(Color.black);
     	} else if (m_type==EdgeType.solutionEdge) {
     		g.setColor(Color.red);
     	}
         g.drawLine(m_node0.position_x(), m_node0.position_y(), m_node1.position_x(), m_node1.position_y());
     }
     public double calcDistance(int x, int y) {
-        if (m_type == EdgeType.borderEdge) {
-            return 100000.;
-        }
         double x0 = m_node0.position_x();
         double y0 = m_node0.position_y();
         double x1 = m_node1.position_x();

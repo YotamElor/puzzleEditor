@@ -11,6 +11,7 @@ public class Node {
         m_radius = 10;
     }
     public void draw(Graphics g) {
+    	g.setColor(Color.black);
         g.drawOval(m_position.x()-m_radius/2, m_position.y()-m_radius/2, m_radius, m_radius);
     }
     public int position_x() {
