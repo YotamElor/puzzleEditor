@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class AwtControlDemo extends JComponent implements MouseListener{
 	private Puzzle m_puzzle;
 	AwtControlDemo() {

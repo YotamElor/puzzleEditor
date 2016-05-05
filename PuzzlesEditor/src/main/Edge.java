@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Edge {
     final private Node m_node0, m_node1;
@@ -20,13 +21,14 @@ public class Edge {
     	} else if (m_type==EdgeType.solutionEdge) {
     		g.setColor(Color.red);
     	}
-        g.drawLine(m_node0.position_x(), m_node0.position_y(), m_node1.position_x(), m_node1.position_y());
+        g.drawLine(m_node0.x(), m_node0.y(), m_node1.x(), m_node1.y());
     }
+    
     public double calcDistance(int x, int y) {
-        double x0 = m_node0.position_x();
-        double y0 = m_node0.position_y();
-        double x1 = m_node1.position_x();
-        double y1 = m_node1.position_y();
+        double x0 = m_node0.x();
+        double y0 = m_node0.y();
+        double x1 = m_node1.x();
+        double y1 = m_node1.y();
         //xt = x0 + (x1-x0)t
         //yt = y0 + (y1-y0)t
         //d = (x-xt)^2 + (y-yt)^2
@@ -42,6 +44,7 @@ public class Edge {
         double d = Math.sqrt((x-xt)*(x-xt) + (y-yt)*(y-yt));
         return d;
     }
+    
     public void flip() {
     	if (m_type==EdgeType.regularEdge) {
     		m_type = EdgeType.borderEdge;
@@ -49,6 +52,21 @@ public class Edge {
     		m_type = EdgeType.solutionEdge;
     	} else if (m_type==EdgeType.solutionEdge) {
     		m_type = EdgeType.regularEdge;
+    	}
+    }
+    
+    public boolean equals(Edge e) {
+    	return (m_node0.equals(e.m_node0)&&m_node1.equals(e.m_node1)) || (m_node0.equals(e.m_node1)&&m_node1.equals(e.m_node0)); 
+    }
+    public void to_stream(ArrayList<Integer> arr) {
+    	m_node0.to_stream(arr);
+    	m_node1.to_stream(arr);
+    	if (m_type==EdgeType.regularEdge) {
+    		arr.add(0);
+    	} else if (m_type==EdgeType.borderEdge) {
+    		arr.add(1);
+    	} else if (m_type==EdgeType.solutionEdge) {
+    		arr.add(2);
     	}
     }
 }
