@@ -1,6 +1,10 @@
 package main;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Puzzle {
@@ -93,5 +97,14 @@ public class Puzzle {
     	for (Edge e : m_edges) {
     		e.to_stream(arr);
     	}
+    }
+    
+    public void save(String filename) throws IOException {
+    	ArrayList<Integer> arr = new ArrayList<Integer>();
+    	to_stream(arr);
+    	FileOutputStream fos = new FileOutputStream(filename+".edt");
+    	ObjectOutputStream oos = new ObjectOutputStream(fos);
+    	oos.writeObject(arr);
+    	oos.close();
     }
 }
